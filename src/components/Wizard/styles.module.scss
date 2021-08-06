@@ -6,12 +6,27 @@
 
   .itemWrapper {
     margin-right: 30px;
+    display: flex;
+    align-items: center;
   }
   .item {
     margin-right: 10px;
-    background-color: $melon;
-    padding: 10px 15px;
-    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $gray;
+    width: 40px;
+    height: 40px;
+    color: $grayer;
     border-radius: 10px;
+    font-weight: bold;
+
+    &.current {
+    background-color: $ua-red;
+    color: $white;
+    }
+    &.past {
+    background-color: $melon;
+    }
   }
 }
