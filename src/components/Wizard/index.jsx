@@ -2,12 +2,24 @@ import styles from './styles.module.scss';
 export const Wizard = () => {
   return (
   <div className={styles.wrapper}>
-    <div>
-      <span>1</span>
-      <span>2</span>
-      <span>3</span>
-      <span>4</span>
-    </div>
+    <div className={styles.wrapper}>
+      <span className={styles.itemWrapper}>
+        <span className={styles.item}>1</span>
+        Massa
+      </span>
+      <span className={styles.itemWrapper}>
+        <span className={styles.item}>1</span>
+        Tamanho
+      </span>
+      <span className={styles.itemWrapper}>
+        <span className={styles.item}>1</span>
+        Sabor
+      </span>
+      <span className={styles.itemWrapper}>
+      <span className={styles.item}>1</span>
+        Pagamento
+      </span>
+      </div>
   </div>
           
   )

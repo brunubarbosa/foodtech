@@ -1,0 +1,17 @@
+@import '../../utils/style/colors.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  .itemWrapper {
+    margin-right: 30px;
+  }
+  .item {
+    margin-right: 10px;
+    background-color: $melon;
+    padding: 10px 15px;
+    color: $white;
+    border-radius: 10px;
+  }
+}
