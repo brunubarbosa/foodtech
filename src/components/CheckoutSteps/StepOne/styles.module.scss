@@ -1,0 +1,31 @@
+@import '../../../utils/style/colors.scss';
+
+.checkWrapper {
+  display: inline-flex;
+  justify-content: space-between;
+  
+  flex-wrap: wrap;
+  label {
+    width: 200px;
+    height: 150px;
+    border-radius: 15px;
+    border: 1px solid $grayer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: $gray;
+    cursor: pointer;
+
+    &.checked {
+      background-color: $melon;
+      border-color: $ua-red;
+    }
+
+    & + input {
+      visibility: hidden;
+      width: 0;
+      margin: 0;
+    }
+  }
+}
