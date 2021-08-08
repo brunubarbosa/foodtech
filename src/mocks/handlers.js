@@ -26,7 +26,7 @@ export const handlers = [
       ]),
     )
   }),
-  rest.get('/api/flavours', (req, res, ctx) => {
+  rest.get('/api/flavors', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
