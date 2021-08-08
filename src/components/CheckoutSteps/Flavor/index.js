@@ -8,7 +8,7 @@ export const Flavor = ({formData: {crusts}, form: { register, watch, formState: 
   const flavorValue = watch('flavor', false);
   return(
     <div className={styles.form}>
-      <h1>Massas</h1>
+      <h1>Sabores</h1>
       <div className={styles.checkWrapper}>
         {flavors.map(({name, id}) => {
             return (

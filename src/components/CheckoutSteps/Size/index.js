@@ -6,12 +6,11 @@ import {Fragment} from 'react'
 
 export const Size = ({form: { register, watch }}) => {
   const {sizes, isError, isLoading } = useSizes()
-  console.log(sizes)
   const crustValue = watch('size', false);
 
   return(
     <div className={styles.form}>
-      <h1>Massas</h1>
+      <h1>Tamanhos</h1>
       <div className={styles.checkWrapper}>
         {sizes.map(({name, id}) => {
             return (
