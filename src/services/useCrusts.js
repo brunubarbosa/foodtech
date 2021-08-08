@@ -4,7 +4,7 @@ import api from './api'
 export const useCrusts = () => {
   const { data, error } = useSWR(`/api/crusts/`, api)
   return {
-    crusts: data?.data,
+    crusts: data?.data || [],
     isLoading: !error && !data,
     isError: error
   }
