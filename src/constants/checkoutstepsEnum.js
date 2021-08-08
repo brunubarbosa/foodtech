@@ -1,3 +1,4 @@
 import StepOne from '../components/CheckoutSteps/StepOne';
 import Payment from '../components/CheckoutSteps/Payment';
-export const CHECKOUT_STEPS = [Payment, StepOne, StepOne, StepOne]
+import Size from '../components/CheckoutSteps/Size';
+export const CHECKOUT_STEPS = [Size, Payment, StepOne, StepOne]

@@ -2,7 +2,7 @@ import {Fragment} from 'react'
 import styles from './styles.module.scss';
 
 export const StepOne = ({formData: {crusts}, form: { register, watch, formState: { errors } }}) => {
-  const crustValue = watch("crust", false);
+  const crustValue = watch('crust', false);
   return(
     <div className={styles.form}>
       <h1>Massas</h1>
