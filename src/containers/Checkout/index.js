@@ -4,37 +4,73 @@ import useWizard from '../../hooks/useWizard';
 import CheckoutForm from '../../components/CheckoutForm';
 import {CHECKOUT_STEPS} from '../../constants/checkoutstepsEnum';
 import {checkoutSteps} from '../../constants/checkoutSteps'
-
+import { useForm } from "react-hook-form";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Payment from '../../components/CheckoutSteps/Payment'
 export const Checkout = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const {Wizard, Content} = useWizard(currentStepIndex, checkoutSteps, CHECKOUT_STEPS)
-
+  const [isRecommendationModalOpen, setIsRecommendationModalOpen] = useState(true);
+  const {Wizard, Content: FormContent} = useWizard(currentStepIndex, checkoutSteps, CHECKOUT_STEPS)
+  const form = useForm();
   const onPreviousStep = () => {
     setCurrentStepIndex(currentStepIndex - 1)
   }
   const onNextStep = () => {
-    setCurrentStepIndex(currentStepIndex + 1)
+    if(checkoutSteps.length - 1 !== currentStepIndex) setCurrentStepIndex(currentStepIndex + 1)
   }
-  return<div className={styles.wrapper}>
-    <main className={styles.content}>
-      <div className={styles.image} />
-      <div className={styles.formWrapper}>
-      <div className={styles.wizard}>
-        {Wizard}
-      </div>
-        <CheckoutForm footerButtons={[
-          {text: 'Anterior', disable: false, onClick: onPreviousStep},
-          {text: checkoutSteps.length - 1 === currentStepIndex ? 
-            'Finalizar' : 'Próximo',
-            disable: false,
-            onClick: onNextStep
-          }
-        ]} >
-          <Content />
-        </CheckoutForm>
-      </div>
-    </main>
-  </div>
+
+  const cancelRecommendationModal = () => setIsRecommendationModalOpen(false)
+
+  const onConfirmRecommendation = () => {
+    console.log(form)
+  }
+  return (
+    <div className={styles.wrapper}>
+      <main className={styles.content}>
+        <div className={styles.image} />
+        <div className={styles.formWrapper}>
+        <div className={styles.wizard}>
+          {Wizard}
+        </div>
+          <CheckoutForm form={form} footerButtons={[
+            {text: 'Anterior', disable: false, onClick: onPreviousStep},
+            {text: checkoutSteps.length - 1 === currentStepIndex ? 
+              'Finalizar' : 'Próximo',
+              disable: false,
+              onClick: onNextStep
+            }
+          ]} >
+            <FormContent form={form} />
+          </CheckoutForm>
+        </div>
+      </main>
+
+      <Dialog
+          open={isRecommendationModalOpen}
+          onClose={cancelRecommendationModal}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <form onSubmit={form.handleSubmit(() => console.log(form.getValues()))}>
+            <DialogTitle >Finalizar compra</DialogTitle>
+            <DialogContent>
+              <Payment form={form}/>
+            </DialogContent>
+            <DialogActions>
+              <button onClick={cancelRecommendationModal} color="primary">
+                Cancelar
+              </button>
+              <button type="submit" onClick={onConfirmRecommendation} color="primary" autoFocus>
+                Finalizar
+              </button>
+            </DialogActions>
+          </form>
+        </Dialog>
+    </div>
+  )
 }
 
 export default Checkout
