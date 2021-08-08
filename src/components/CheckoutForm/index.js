@@ -1,13 +1,12 @@
 import styles from './styles.module.scss';
 
-export const CheckoutForm = ({children, footerButtons, form: { register, handleSubmit, watch, formState: { errors } }}) => {
-  const onSubmit = (data) => console.log(data)
+export const CheckoutForm = ({children, onForwardStep, footerButtons, form: { register, handleSubmit, watch, formState: { errors } }}) => {
   return(
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+    <form onSubmit={handleSubmit(onForwardStep)} className={styles.form}>
       {children}
       <footer>
-        {footerButtons.map(({text, onClick}) => (
-          <button key={text} type={text === 'Finalizar' ? 'submit' : 'button'} onClick={onClick}>
+        {footerButtons.map(({text, onClick, type, disabled}) => (
+          <button key={text} type={type} disabled={disabled} onClick={onClick}>
             {text}
           </button>
         ))}

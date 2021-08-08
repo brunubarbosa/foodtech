@@ -1,18 +1,20 @@
+import {Fragment} from 'react'
 import styles from './styles.module.scss';
 
-export const StepOne = ({form: { register, handleSubmit, watch, formState: { errors } }}) => {
+export const StepOne = ({formData: {crusts}, form: { register, watch, formState: { errors } }}) => {
+  const crustValue = watch("crust", false);
   return(
     <div className={styles.form}>
-      <h1>Massa</h1>
+      <h1>Massas</h1>
       <div className={styles.checkWrapper}>
-        <label className={styles.checked} htmlFor="test1">massa gordurosa</label>
-        <input type="radio" {...register('test')} value="1" id="test1" />
-        <label htmlFor="test2">massa fina</label>
-        <input type="radio" {...register('test')} value="2" id="test2" />
-        <label htmlFor="test3">massa grossa</label>
-        <input type="radio" {...register('test')} value="3" id="test3" />
-        <label htmlFor="test4">massa diet</label>
-        <input type="radio" {...register('test')} value="4" id="test4" />
+        {crusts.map(({name, id}) => {
+            return (
+              <Fragment key={id}>
+                <label className={id === crustValue ? styles.checked : ''} htmlFor={name}>{name}</label>
+                <input type="radio" {...register('crust')} value={id} id={name} />
+              </Fragment>
+            )
+          })}
       </div>
     </div>
   )

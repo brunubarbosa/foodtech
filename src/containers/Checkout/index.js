@@ -9,16 +9,21 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Payment from '../../components/CheckoutSteps/Payment'
+import Payment from '../../components/CheckoutSteps/Payment';
+import useCrusts from '../../services/useCrusts';
+
 export const Checkout = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isRecommendationModalOpen, setIsRecommendationModalOpen] = useState(true);
   const {Wizard, Content: FormContent} = useWizard(currentStepIndex, checkoutSteps, CHECKOUT_STEPS)
-  const form = useForm();
+  const form = useForm({ mode: `onChange`});
+
+  const { crusts, isLoading, isError } = useCrusts()
+
   const onPreviousStep = () => {
     setCurrentStepIndex(currentStepIndex - 1)
   }
-  const onNextStep = () => {
+  const onForwardStep = () => {
     if(checkoutSteps.length - 1 !== currentStepIndex) setCurrentStepIndex(currentStepIndex + 1)
   }
 
@@ -27,6 +32,7 @@ export const Checkout = () => {
   const onConfirmRecommendation = () => {
     console.log(form)
   }
+
   return (
     <div className={styles.wrapper}>
       <main className={styles.content}>
@@ -35,15 +41,22 @@ export const Checkout = () => {
         <div className={styles.wizard}>
           {Wizard}
         </div>
-          <CheckoutForm form={form} footerButtons={[
-            {text: 'Anterior', disable: false, onClick: onPreviousStep},
-            {text: checkoutSteps.length - 1 === currentStepIndex ? 
+          <CheckoutForm form={form} onForwardStep={onForwardStep}
+            footerButtons={[{
+              text: 'Anterior',
+              type: 'button',
+              disable: false,
+              onClick: onPreviousStep
+            },
+            {
+              text: checkoutSteps.length - 1 === currentStepIndex ? 
               'Finalizar' : 'Próximo',
               disable: false,
-              onClick: onNextStep
+              type: 'submit'
             }
-          ]} >
-            <FormContent form={form} />
+            ]}
+          >
+            <FormContent form={form} formData={{crusts}} />
           </CheckoutForm>
         </div>
       </main>
@@ -57,7 +70,7 @@ export const Checkout = () => {
           <form onSubmit={form.handleSubmit(() => console.log(form.getValues()))}>
             <DialogTitle >Finalizar compra</DialogTitle>
             <DialogContent>
-              <Payment form={form}/>
+              <Payment form={form} />
             </DialogContent>
             <DialogActions>
               <button onClick={cancelRecommendationModal} color="primary">
