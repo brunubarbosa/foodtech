@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-start;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+}

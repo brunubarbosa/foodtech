@@ -1,2 +1,3 @@
-import StepOne from '../components/CheckoutSteps/StepOne'
-export const CHECKOUT_STEPS = [StepOne, StepOne, StepOne, StepOne]
+import StepOne from '../components/CheckoutSteps/StepOne';
+import Payment from '../components/CheckoutSteps/Payment';
+export const CHECKOUT_STEPS = [Payment, StepOne, StepOne, StepOne]
