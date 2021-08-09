@@ -18,15 +18,17 @@ const [isCvcFocused, setIsCvcFocused] = useState(false);
   ], '')
   return(
     <div className={styles.wrapper}>
-      <div className={styles.cardWrapper}>
-        <Cards
-          cvc={cvc}
-          expiry={credicardExpire}
-          focused={isCvcFocused ? 'cvc' : 'name'}
-          name={name}
-          number={credicardNumber}
-        />
-      </div>
+      <h1>Pagamento</h1>
+      <div className={styles.contentWrapper}>
+        <div className={styles.cardWrapper}>
+          <Cards
+            cvc={cvc}
+            expiry={credicardExpire}
+            focused={isCvcFocused ? 'cvc' : 'name'}
+            name={name}
+            number={credicardNumber}
+          />
+        </div>
         <div className={styles.form}>
           <label>Nome</label>
           <input type="text" {...register('name', {required: 'true'})} />
@@ -41,6 +43,7 @@ const [isCvcFocused, setIsCvcFocused] = useState(false);
             onBlur={() => setIsCvcFocused(false)}
           />
         </div>
+      </div>
     </div>
   )
 }

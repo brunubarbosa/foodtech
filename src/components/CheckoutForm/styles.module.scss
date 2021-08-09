@@ -10,4 +10,17 @@
   h1 {
     color: $xiketic;
   }
+
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 20px 0 10px;
+
+  }
+  .buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    max-width: 50%;
+  }
 }

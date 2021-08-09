@@ -1,4 +1,5 @@
 import styles from './styles.module.scss';
+import Button from '@material-ui/core/Button';
 
 export const CheckoutForm = ({
   children,
@@ -10,11 +11,14 @@ export const CheckoutForm = ({
     <form onSubmit={handleSubmit(onForwardStep)} className={styles.form}>
       {children}
       <footer>
-        {footerButtons.map(({text, onClick, type, disabled}) => (
-          <button key={text} type={type} disabled={disabled} onClick={onClick}>
-            {text}
-          </button>
-        ))}
+        <div className={styles.buttonGroup}>
+
+          {footerButtons.map(({text, onClick, type, disabled, variant, color}) => (
+            <Button variant={variant} color={color} key={text} type={type} disabled={disabled} onClick={onClick}>
+              {text}
+            </Button>
+          ))}
+        </div>
       </footer>
     </form>
   )

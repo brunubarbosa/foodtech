@@ -66,18 +66,21 @@ export const Checkout = () => {
             footerButtons={[{
               text: 'Anterior',
               type: 'button',
+              color: 'secondary',
               disable: false,
               onClick: onPreviousStep
             },
             {
               text: checkoutSteps.length - 1 === currentStepIndex ? 
               'Finalizar' : 'Próximo',
+              variant: 'contained',
+              color: 'primary',
               disable: false,
               type: 'submit'
             }
             ]}
           >
-            <FormContent form={form} formData={{crusts}} />
+            <FormContent form={form} />
           </CheckoutForm>
         </div>
       </main>
