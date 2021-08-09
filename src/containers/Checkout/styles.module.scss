@@ -1,17 +1,18 @@
 @import '../../utils/style/colors.scss';
 
 .wrapper {
-  background-color: $gray;
+  background-color: $light-gray;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   .content {
     background-color: $white;
     width: 90%;
     height: 90%;
-    border-radius: 10px;
+    border-radius: 25px;
     overflow: hidden;
     display: flex;
     flex-direction: row;
@@ -26,8 +27,7 @@
   }
 }
 .formWrapper {
-  width: auto;
-  flex:  2 auto;
+  flex:  2 1;
   display: flex;
   flex-direction: column;
   align-items: center;
