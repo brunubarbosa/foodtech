@@ -2,7 +2,10 @@
 
 .form {
   width: 80%;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 68%;
 
   h1 {
     color: $xiketic;

@@ -9,3 +9,20 @@ html, body, #root, .App {
 
 }
 
+*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px #8585854d;
+	box-shadow: inset 0 0 6px #8585854d;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	background-color: #a7a7a7;
+}
