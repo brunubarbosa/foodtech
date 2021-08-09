@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 68%;
+  height: calc(100% - 203px);
 
   h1 {
     color: $xiketic;

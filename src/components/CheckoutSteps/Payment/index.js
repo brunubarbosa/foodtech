@@ -30,14 +30,16 @@ const [isCvcFocused, setIsCvcFocused] = useState(false);
           />
         </div>
         <div className={styles.form}>
-          <label>Nome</label>
-          <input type="text" {...register('name', {required: 'true'})} />
-          <label>Cartão de credito</label>
-          <input type="text" {...register('credicardNumber', {required: 'true'})} />
-          <label>Validade</label>
-          <input type="text" {...register('credicardExpire', {required: 'true'})} />
-          <label>CVC</label>
-          <input type="tel"
+          <label htmlFor="name" >Nome</label>
+          <input type="text" id="name" {...register('name', {required: 'true'})} />
+          <label htmlFor="credicardNumber">Cartão de credito</label>
+          <input type="text" id="credicardNumber" {...register('credicardNumber', {required: 'true'})} />
+          <label htmlFor="credicardExpire">Validade</label>
+          <input type="text" id="credicardExpire" {...register('credicardExpire', {required: 'true'})} />
+          <label htmlFor="cvc">CVC</label>
+          <input
+            id="cvc"
+            type="tel"
             onFocus={() => setIsCvcFocused(true)}
             {...register('cvc', {required: 'true'})}
             onBlur={() => setIsCvcFocused(false)}

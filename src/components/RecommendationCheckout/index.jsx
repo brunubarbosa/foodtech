@@ -6,20 +6,22 @@ import Payment from '../CheckoutSteps/Payment';
 import Button from '@material-ui/core/Button';
 
 export const CheckoutSuccessDialog = ({form, cancelRecommendationDialog, onConfirmRecommendation}) => {
+  const onConfirm = (data) => {
+    onConfirmRecommendation({...data, isPromotion: true})
+  }
   return (
-          
-        <form onSubmit={form.handleSubmit(() => console.log(form.getValues()))}>
-          <DialogTitle >Finalizar compra</DialogTitle>
-          <DialogContent>
-            <Payment form={form} />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={cancelRecommendationDialog} color="secondary">Cancelar</Button>
-            <Button variant="contained" size="small" color="primary" >
-              Finalizar
-            </Button>
-          </DialogActions>
-        </form>
+    <form onSubmit={form.handleSubmit(onConfirm)}>
+      <DialogTitle >Finalizar compra</DialogTitle>
+      <DialogContent>
+        <Payment form={form} />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={cancelRecommendationDialog} color="secondary">Cancelar</Button>
+        <Button type="submit" variant="contained" size="small" color="primary" >
+          Finalizar
+        </Button>
+      </DialogActions>
+    </form>
   )
 }
 

@@ -13,8 +13,8 @@ export const CheckoutForm = ({
       <footer>
         <div className={styles.buttonGroup}>
 
-          {footerButtons.map(({text, onClick, type, disabled, variant, color}) => (
-            <Button variant={variant} color={color} key={text} type={type} disabled={disabled} onClick={onClick}>
+          {footerButtons.map(({text, onClick, type, disable, variant, color}) => (
+            <Button variant={variant} color={color} key={text} type={type} disabled={disable} onClick={onClick}>
               {text}
             </Button>
           ))}

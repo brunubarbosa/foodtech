@@ -12,6 +12,7 @@ import RecommendationCheckout from '../../components/RecommendationCheckout';
 import { ToastContainer, toast } from "react-toastify";
 import PromotionNotice from '../../components/PromotionNotice';
 import usePromotion from '../../services/usePromotion'
+import buy from '../../services/buy'
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,11 +20,11 @@ export const Checkout = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isRecommendationDialogOpen, setIsRecommendationDialogOpen] = useState(false);
   const [isCheckoutSuccessDialogOpen, setIsCheckoutSuccessDialogOpen] = useState(false);
+  const [buyMessage, setBuyMessage] = useState(null);
   const {promotion} = usePromotion()
   const {Wizard, Content: FormContent} = useWizard(currentStepIndex, checkoutSteps, CHECKOUT_STEPS)
   const form = useForm({ mode: 'onChange'});
-
-  const { crusts, isLoading, isError } = useCrusts()
+  const recommendationForm = useForm({ mode: 'onChange'});
 
   useEffect(() => {
     promotion && toast(() => (
@@ -40,15 +41,28 @@ export const Checkout = () => {
     setCurrentStepIndex(currentStepIndex - 1)
   }
 
-  const submitForm = () => {
+  const submitForm = async (formData) => {
+    const {data} = await buy(formData)
+    setBuyMessage(data.message)
     setIsCheckoutSuccessDialogOpen(true)
+    setIsRecommendationDialogOpen(false)
+    form.reset()
+    recommendationForm.reset()
+    setCurrentStepIndex(0)
+
   }
-  const onForwardStep = () => {
-    if(checkoutSteps.length - 1 === currentStepIndex) return submitForm();
+  const onForwardStep = (data) => {
+    const isLastStep = checkoutSteps.length - 1 === currentStepIndex
+    if(isLastStep) return submitForm(data);
     setCurrentStepIndex(currentStepIndex + 1)
   }
 
   const cancelRecommendationDialog = () => setIsRecommendationDialogOpen(false)
+
+  const closeSuccessDialog = () => {
+    setBuyMessage(null)
+    setIsCheckoutSuccessDialogOpen(false)
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -60,14 +74,14 @@ export const Checkout = () => {
           </div>
           <ToastContainer
             onClick={() => setIsRecommendationDialogOpen(true)}
-            position="bottom-right"
+            position="bottom-left"
           />
           <CheckoutForm form={form} onForwardStep={onForwardStep}
             footerButtons={[{
               text: 'Anterior',
               type: 'button',
               color: 'secondary',
-              disable: false,
+              disable: currentStepIndex === 0,
               onClick: onPreviousStep
             },
             {
@@ -87,11 +101,14 @@ export const Checkout = () => {
 
       <Dialog
           open={isCheckoutSuccessDialogOpen}
-          onClose={() => setIsCheckoutSuccessDialogOpen(false)}
+          onClose={closeSuccessDialog}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-        <CheckoutSuccessDialog />
+        <CheckoutSuccessDialog
+          message={buyMessage}
+          close={closeSuccessDialog}
+        />
       </Dialog>
       <Dialog
           open={isRecommendationDialogOpen}
@@ -100,7 +117,7 @@ export const Checkout = () => {
           aria-describedby="alert-dialog-description"
         >
         <RecommendationCheckout 
-          form={form}
+          form={recommendationForm}
           cancelRecommendationDialog={cancelRecommendationDialog}
           onConfirmRecommendation={submitForm}
          />

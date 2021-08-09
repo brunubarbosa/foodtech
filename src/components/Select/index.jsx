@@ -8,9 +8,10 @@ export const Select = ({items, register, value, isMultiple, errorMessage}) => {
         {errorMessage && <p className={styles.errorMesagem}>{errorMessage}</p>}
       <div className={styles.checkWrapper}>
         {items.map(({name, id}) => {
+          const isChecked = id === value 
           return (
             <Fragment key={id}>
-              <label className={id === value ? styles.checked : ''} htmlFor={name}>{name}</label>
+              <label className={isChecked ? styles.checked : ''} htmlFor={name}>{name}</label>
               <input type={selectType} {...register()} value={id} id={name} />
             </Fragment>
           )

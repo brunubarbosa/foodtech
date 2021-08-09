@@ -1,69 +1,40 @@
 import { rest } from 'msw'
+import mockCrusts from './mockCrusts'
+import mockSizes from './mockSizes'
+import mockFlavors from './mockFlavors'
+import {mockBuy, mockBuyPoints} from './mockBuy'
+import mockPromotion from './mockPromotion'
 
 export const handlers = [
   rest.get('/api/crusts', (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json([
-        {name: 'New work', id: '1'},
-        {name: 'Diet', id: '2'},
-        {name: 'Sem glúten', id: '3'},
-        {name: 'Integral', id: '4'},
-        {name: 'Massa fina', id: '5'},
-        {name: 'Estilo siciliano', id: '6'},
-        {name: 'Massa napolitana', id: '7'}
-      ]),
+      ctx.json(mockCrusts),
     )
   }),
   rest.get('/api/sizes', (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json([
-        {name: 'Pequeno', id: '2'},
-        {name: 'Grande', id: '3'},
-        {name: 'Super grande', id: '4'},
-        {name: 'No metro', id: '5'}
-      ]),
+      ctx.json(mockSizes),
     )
   }),
   rest.get('/api/flavors', (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json([
-        {name: 'Bacon', id: '2'},
-        {name: 'Pepperoni', id: '3'},
-        {name: 'Calabresa', id: '4'},
-        {name: 'Brócolis', id: '5'},
-        {name: 'Portuguesa', id: '6'},
-        {name: 'Marguerita', id: '7'},
-        {name: 'Muçarela', id: '9'},
-        {name: 'Napolitana', id: '10'},
-        {name: 'Brigadeiro', id: '11'},
-        {name: 'Romeu e Julieta', id: '12'}
-      ]),
+      ctx.json(mockFlavors),
     )
   }),
-  rest.post('/api/create', (req, res, ctx) => {
+  rest.post('/api/buy', (req, res, ctx) => {
+    const {isPromotion} = req.body
     return res(
       ctx.status(200),
-      ctx.json([
-        {name: 'Bacon', id: '2'},
-        {name: 'Pepperoni', id: '3'},
-        {name: 'Calabresa', id: '4'},
-        {name: 'Brócolis', id: '5'},
-        {name: 'Portuguesa', id: '6'},
-        {name: 'Marguerita', id: '7'},
-        {name: 'Muçarela', id: '9'},
-        {name: 'Napolitana', id: '10'},
-        {name: 'Brigadeiro', id: '11'},
-        {name: 'Romeu e Julieta', id: '12'}
-      ]),
+      ctx.json(isPromotion ? mockBuyPoints : mockBuy),
     )
   }),
   rest.get('/api/promotion', (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json({item: {name: 'Bacon', id: '2', message: 'Clique para finalizar a compra da pizza sabor Bacon', image: 'https://lh3.googleusercontent.com/proxy/6IPV4_5LmXKg2rDmK0_q28WUgcppTysy7dXNcWtn8Rago_Isu4uh0SVwzMtQO5OLJx9BGhXakmcphgQdstGLPZKbuoYxPR1RZkFnvPWaHa9l5FB1xYvx'}}),
+      ctx.json(mockPromotion),
     )
   }),
 ]
