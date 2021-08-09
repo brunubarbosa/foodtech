@@ -3,7 +3,7 @@ export const mockPromotion = {
   {name: 'Bacon',
   id: '2',
   message: 'Clique para finalizar a compra da pizza sabor Bacon',
-  image: 'https://lh3.googleusercontent.com/proxy/6IPV4_5LmXKg2rDmK0_q28WUgcppTysy7dXNcWtn8Rago_Isu4uh0SVwzMtQO5OLJx9BGhXakmcphgQdstGLPZKbuoYxPR1RZkFnvPWaHa9l5FB1xYvx'
+  image: 'https://1.bp.blogspot.com/-Zspspc2K5qY/WHZLvQt5VUI/AAAAAAAAS3Y/gXpXSQsnPtg1l63hRy4WuX4Qaq9VHpfRwCLcB/s1600/394%2BPizza%2Bde%2Bcalabresa.jpg'
   }
 }
 
