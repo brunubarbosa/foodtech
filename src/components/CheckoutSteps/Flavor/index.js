@@ -14,7 +14,7 @@ export const Flavor = ({formData: {crusts}, form: { register, watch, formState: 
             return (
               <Fragment key={id}>
                 <label className={id === flavorValue ? styles.checked : ''} htmlFor={name}>{name}</label>
-                <input type="radio" {...register('flavor')} value={id} id={name} />
+                <input type="radio" {...register('flavor', {required: true})} value={id} id={name} />
               </Fragment>
             )
           })}

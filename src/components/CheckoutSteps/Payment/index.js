@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/lib/styles.scss'
 
-export const StepOne = ({form: { register, watch }}) => {
+export const Payment = ({form: { register, watch }}) => {
 const [isCvcFocused, setIsCvcFocused] = useState(false);
   const [
     name = '',
@@ -29,7 +29,7 @@ const [isCvcFocused, setIsCvcFocused] = useState(false);
       </div>
         <div className={styles.form}>
           <label>Nome</label>
-          <input type="text" {...register('name', { required: 'true', maxLength: 2 })} />
+          <input type="text" {...register('name', {required: 'true'})} />
           <label>Cartão de credito</label>
           <input type="text" {...register('credicardNumber', {required: 'true'})} />
           <label>Validade</label>
@@ -45,4 +45,4 @@ const [isCvcFocused, setIsCvcFocused] = useState(false);
   )
 }
 
-export default StepOne
+export default Payment

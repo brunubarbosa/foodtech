@@ -15,7 +15,7 @@ export const Size = ({form: { register, watch }}) => {
           return (
             <Fragment key={id}>
               <label className={id === crustValue ? styles.checked : ''} htmlFor={name}>{name}</label>
-              <input type="radio" {...register('size')} value={id} id={name} />
+              <input type="radio" {...register('size', {required: true})} value={id} id={name} />
             </Fragment>
           )
         })}

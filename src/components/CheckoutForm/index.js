@@ -1,6 +1,11 @@
 import styles from './styles.module.scss';
 
-export const CheckoutForm = ({children, onForwardStep, footerButtons, form: { register, handleSubmit, watch, formState: { errors } }}) => {
+export const CheckoutForm = ({
+  children,
+  onForwardStep,
+  footerButtons,
+  form: { register, handleSubmit, watch, formState: { errors }}
+}) => {
   return(
     <form onSubmit={handleSubmit(onForwardStep)} className={styles.form}>
       {children}
