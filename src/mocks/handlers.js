@@ -43,4 +43,27 @@ export const handlers = [
       ]),
     )
   }),
+  rest.post('/api/create', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        {name: 'Bacon', id: '2'},
+        {name: 'Pepperoni', id: '3'},
+        {name: 'Calabresa', id: '4'},
+        {name: 'Brócolis', id: '5'},
+        {name: 'Portuguesa', id: '6'},
+        {name: 'Marguerita', id: '7'},
+        {name: 'Muçarela', id: '9'},
+        {name: 'Napolitana', id: '10'},
+        {name: 'Brigadeiro', id: '11'},
+        {name: 'Romeu e Julieta', id: '12'}
+      ]),
+    )
+  }),
+  rest.get('/api/promotion', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({item: {name: 'Bacon', id: '2', message: 'Clique para finalizar a compra da pizza sabor Bacon', image: 'https://lh3.googleusercontent.com/proxy/6IPV4_5LmXKg2rDmK0_q28WUgcppTysy7dXNcWtn8Rago_Isu4uh0SVwzMtQO5OLJx9BGhXakmcphgQdstGLPZKbuoYxPR1RZkFnvPWaHa9l5FB1xYvx'}}),
+    )
+  }),
 ]

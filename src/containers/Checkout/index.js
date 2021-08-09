@@ -11,27 +11,30 @@ import CheckoutSuccessDialog from '../../components/CheckoutSuccessDialog';
 import RecommendationCheckout from '../../components/RecommendationCheckout';
 import { ToastContainer, toast } from "react-toastify";
 import PromotionNotice from '../../components/PromotionNotice';
+import usePromotion from '../../services/usePromotion'
+
 import 'react-toastify/dist/ReactToastify.css';
 
 export const Checkout = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [isRecommendationDialogOpen, setIsRecommendationDialogOpen] = useState(true);
+  const [isRecommendationDialogOpen, setIsRecommendationDialogOpen] = useState(false);
   const [isCheckoutSuccessDialogOpen, setIsCheckoutSuccessDialogOpen] = useState(false);
+  const {promotion} = usePromotion()
   const {Wizard, Content: FormContent} = useWizard(currentStepIndex, checkoutSteps, CHECKOUT_STEPS)
   const form = useForm({ mode: 'onChange'});
 
   const { crusts, isLoading, isError } = useCrusts()
 
   useEffect(() => {
-    toast(() => (
+    promotion && toast(() => (
       <PromotionNotice
-        image={'image'}
-        title="Promoção do dia valendo pontos!">
-        <span>Clique e compre pizza siciliana</span>
-      </PromotionNotice>
+        image={promotion.image}
+        title="Promoção do dia valendo pontos!"
+        message={promotion.message}
+      />
     )
     )
-  }, [])
+  }, [promotion])
 
   const onPreviousStep = () => {
     setCurrentStepIndex(currentStepIndex - 1)

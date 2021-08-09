@@ -1,22 +1,21 @@
-import {Fragment} from 'react'
 import styles from './styles.module.scss';
+import Select from '../../Select';
+import useCrusts from '../../../services/useCrusts';
 
 export const Crust = ({
-  formData: {crusts},form: { register, watch, formState: { errors } }}) => {
-  const crustValue = watch('crust', false);
+  form: { register, watch, formState: { errors } }}) => {
+    const {crusts, isError, isLoading } = useCrusts()
+    const crustValue = watch('crust', false);
   return(
     <div className={styles.form}>
       <h1>Massas</h1>
-      <div className={styles.checkWrapper}>
-        {crusts.map(({name, id}) => {
-          return (
-            <Fragment key={id}>
-              <label className={id === crustValue ? styles.checked : ''} htmlFor={name}>{name}</label>
-              <input type="radio" {...register('crust', {required: true})} value={id} id={name} />
-            </Fragment>
-          )
-        })}
-      </div>
+      <Select
+        items={crusts || []}
+        value={crustValue}
+        isMultiple={false}
+        errorMessage={errors?.crust?.message}
+        register={() => register('crust', {required: '*Escolha uma massa'})}
+      />
     </div>
   )
 }
