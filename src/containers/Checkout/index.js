@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import styles from './styles.module.scss';
 import useWizard from '../../hooks/useWizard';
 import CheckoutForm from '../../components/CheckoutForm';
@@ -9,6 +9,9 @@ import Dialog from '@material-ui/core/Dialog';
 import useCrusts from '../../services/useCrusts';
 import CheckoutSuccessDialog from '../../components/CheckoutSuccessDialog';
 import RecommendationCheckout from '../../components/RecommendationCheckout';
+import { ToastContainer, toast } from "react-toastify";
+import PromotionNotice from '../../components/PromotionNotice';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Checkout = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -18,6 +21,17 @@ export const Checkout = () => {
   const form = useForm({ mode: 'onChange'});
 
   const { crusts, isLoading, isError } = useCrusts()
+
+  useEffect(() => {
+    toast(() => (
+      <PromotionNotice
+        image={'image'}
+        title="Promoção do dia valendo pontos!">
+        <span>Clique e compre pizza siciliana</span>
+      </PromotionNotice>
+    )
+    )
+  }, [])
 
   const onPreviousStep = () => {
     setCurrentStepIndex(currentStepIndex - 1)
@@ -41,6 +55,10 @@ export const Checkout = () => {
           <div className={styles.wizard}>
             {Wizard}
           </div>
+          <ToastContainer
+            onClick={() => setIsRecommendationDialogOpen(true)}
+            position="bottom-right"
+          />
           <CheckoutForm form={form} onForwardStep={onForwardStep}
             footerButtons={[{
               text: 'Anterior',

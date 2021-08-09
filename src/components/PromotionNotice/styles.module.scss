@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+
+  img {
+    max-width: 90px;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+    margin-bottom: 0px;
+  }
+
+  .textContentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}

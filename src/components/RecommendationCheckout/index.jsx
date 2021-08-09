@@ -3,6 +3,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Payment from '../CheckoutSteps/Payment';
+import Button from '@material-ui/core/Button';
+
+
 export const CheckoutSuccessDialog = ({form, cancelRecommendationModal, onConfirmRecommendation}) => {
   return (
           
@@ -12,12 +15,10 @@ export const CheckoutSuccessDialog = ({form, cancelRecommendationModal, onConfir
             <Payment form={form} />
           </DialogContent>
           <DialogActions>
-            <button onClick={cancelRecommendationModal} color="primary">
-              Cancelar
-            </button>
-            <button type="submit" onClick={onConfirmRecommendation} color="primary" autoFocus>
+            <Button onClick={cancelRecommendationModal} color="secondary">Cancelar</Button>
+            <Button variant="contained" size="small" color="primary" >
               Finalizar
-            </button>
+            </Button>
           </DialogActions>
         </form>
   )
