@@ -16,7 +16,7 @@ export const Checkout = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isRecommendationModalOpen, setIsRecommendationModalOpen] = useState(true);
   const {Wizard, Content: FormContent} = useWizard(currentStepIndex, checkoutSteps, CHECKOUT_STEPS)
-  const form = useForm({ mode: `onChange`});
+  const form = useForm({ mode: 'onChange'});
 
   const { crusts, isLoading, isError } = useCrusts()
 
@@ -38,9 +38,9 @@ export const Checkout = () => {
       <main className={styles.content}>
         <div className={styles.image} />
         <div className={styles.formWrapper}>
-        <div className={styles.wizard}>
-          {Wizard}
-        </div>
+          <div className={styles.wizard}>
+            {Wizard}
+          </div>
           <CheckoutForm form={form} onForwardStep={onForwardStep}
             footerButtons={[{
               text: 'Anterior',
@@ -67,21 +67,21 @@ export const Checkout = () => {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <form onSubmit={form.handleSubmit(() => console.log(form.getValues()))}>
-            <DialogTitle >Finalizar compra</DialogTitle>
-            <DialogContent>
-              <Payment form={form} />
-            </DialogContent>
-            <DialogActions>
-              <button onClick={cancelRecommendationModal} color="primary">
-                Cancelar
-              </button>
-              <button type="submit" onClick={onConfirmRecommendation} color="primary" autoFocus>
-                Finalizar
-              </button>
-            </DialogActions>
-          </form>
-        </Dialog>
+        <form onSubmit={form.handleSubmit(() => console.log(form.getValues()))}>
+          <DialogTitle >Finalizar compra</DialogTitle>
+          <DialogContent>
+            <Payment form={form} />
+          </DialogContent>
+          <DialogActions>
+            <button onClick={cancelRecommendationModal} color="primary">
+              Cancelar
+            </button>
+            <button type="submit" onClick={onConfirmRecommendation} color="primary" autoFocus>
+              Finalizar
+            </button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </div>
   )
 }

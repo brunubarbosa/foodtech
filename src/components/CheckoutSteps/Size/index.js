@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './styles.module.scss';
 import useSizes from '../../../services/useSizes';
 
@@ -13,13 +12,13 @@ export const Size = ({form: { register, watch }}) => {
       <h1>Tamanhos</h1>
       <div className={styles.checkWrapper}>
         {sizes.map(({name, id}) => {
-            return (
-              <Fragment key={id}>
-                <label className={id === crustValue ? styles.checked : ''} htmlFor={name}>{name}</label>
-                <input type="radio" {...register('size')} value={id} id={name} />
-              </Fragment>
-            )
-          })}
+          return (
+            <Fragment key={id}>
+              <label className={id === crustValue ? styles.checked : ''} htmlFor={name}>{name}</label>
+              <input type="radio" {...register('size')} value={id} id={name} />
+            </Fragment>
+          )
+        })}
       </div>
     </div>
   )
